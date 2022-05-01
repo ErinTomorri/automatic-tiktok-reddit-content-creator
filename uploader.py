@@ -1,4 +1,5 @@
 from distutils.command.upload import upload
+from msilib.schema import Error
 from click import option
 import undetected_chromedriver as uc
 import requests
@@ -18,9 +19,11 @@ async def main():
     options = uc.ChromeOptions()
 
     options.add_argument("--log-level=3")
-    options.add_argument('disable-infobars')
+    prefs = {"credentials_enable_service": False,
+     "profile.password_manager_enabled": False}
+    options.add_experimental_option("prefs", prefs)
 
-    driver = uc.Chrome(options=options)
+    driver = uc.Chrome(options=options, executable_path= path)
     driver.get("https://www.tiktok.com/login")
 
     driver.set_page_load_timeout(25)
@@ -35,8 +38,9 @@ async def main():
 
     #for num in range(len(list1)):
     if num == 0:
-        user1 = "user"
-        pass1 = "pass"
+        user1 = "bburgers783@gmail.com"
+        pass1 = "Dragon1122!"
+        time.sleep(5)
 
         driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div[1]/div[2]/div[2]').click()
         time.sleep(5)
@@ -56,23 +60,27 @@ async def main():
         log = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/form/button')
         log.click()
 
-        time.sleep(5)
-
-        log = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/form/button')
-        log.click()
+        try:
+            log = driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/form/button')
+            log.click()
+            time.sleep(5)
+        except Error:
+            pass
 
         time.sleep(5)
         
-        upload0 = driver.find_element_by_xpath('//*[@id="app"]/div[1]/div/div[2]/div[1]/a/span/svg/path')
+        upload0 = driver.find_element_by_xpath('//*[@id="app"]/div[1]/div/div[2]/div[1]/a/span')
         upload0.click()
-        time.sleep(5)
+        time.sleep(15)
 
-        upload1 = driver.find_element_by_xpath('//*[@id="root"]/div/div/div/div/div[2]/div[1]/div/div/div[4]/button/div/div')
-        upload1.click()
-
+        pyautogui.click(x=321, y=678)
+        time.sleep(10)
         video = path1+list1[num]
         pyautogui.write(video, interval=0.25)
-        
+        pyautogui.press('enter') 
+        time.sleep(10)
+
+        os.remove()
 
 
 if __name__ == '__main__':
