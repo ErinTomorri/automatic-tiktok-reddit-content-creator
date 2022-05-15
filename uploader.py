@@ -38,8 +38,7 @@ async def main():
 
     #for num in range(len(list1)):
     if num == 0:
-        user1 = "bburgers783@gmail.com"
-        pass1 = "Dragon1122!"
+       
         time.sleep(5)
 
         driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/div/div[1]/div[2]/div[2]').click()
