@@ -5,4 +5,6 @@ currently working on it (march 24,2022), planning on updating later tonight. Thi
 
 1. get reddit cookies and tiktok
 2. goto main and run
-3. the video will be downloaded
+3. the video will be downloaded into the rendered folder
+4. upload the tiktok manually
+5. 
