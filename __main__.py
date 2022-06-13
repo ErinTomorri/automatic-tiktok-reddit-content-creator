@@ -14,10 +14,9 @@ async def main():
             # Avoid getting banned, no NSFW posts
             if 'nsfw' in post['data']['whitelist_status']:
                 continue
-            num123 = 1
+
             url = post['data']['url']
             name = url.split('/')[-2]
-            
             print(f"⏱ Processing post: {name}")
 
             # Make sure we have not already rendered/uploaded post
@@ -47,11 +46,7 @@ async def main():
             print("\n🎥 Rendering video...")
             if video.render(name):
                 # Upload video if rendered
-                print("🌟 Uploading to TikTok...")
-                if upload_to_tiktok(name,data["post"]):
-                    print("✅ Uploaded successfully!")
-                else:
-                    print("❌ Failed to upload!")
+                print("🌟 Next video")
         except Exception as e:
             if config['debug']:
                 raise e
