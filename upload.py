@@ -6,9 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from utils import config
 
-# Huge credits to redianmarku
-# https://github.com/redianmarku/tiktok-autouploader
-
 def upload_to_tiktok(name,title):
     bot = utils.create_bot() # Might not work in headless mode
     bot.set_window_size(1920, 1080*2) # Ensure upload button is visible, does not matter if it goes off screen
