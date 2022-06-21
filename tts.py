@@ -11,3 +11,4 @@ async def generate(text,name,voice):
         async for i in communicate.run(text,voice=voice):
             if i[2] is not None:
                 fp.write(i[2])
+                
