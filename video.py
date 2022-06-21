@@ -40,5 +40,5 @@ def render(name):
     composite.duration = sound_clips.duration
 
     # Render
-    composite.write_videofile(f'render/{name}.mp4',threads=4,fps=24)
+    composite.write_videofile(f'render/{name}.mp4',threads=4,fps=30)
     return True
