@@ -1,6 +1,0 @@
-undetected-chromedriver
-selenium
-edge-tts
-moviepy
-requests
-pyyaml
