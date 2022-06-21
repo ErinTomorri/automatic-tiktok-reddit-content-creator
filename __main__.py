@@ -1,4 +1,6 @@
 import asyncio,tts,os,video,requests
+from distutils.log import error
+from tkinter.tix import Tree
 import imp
 from scraper import scrape
 from upload import upload_to_tiktok
@@ -7,21 +9,41 @@ from utils import config
 async def main():
     # Fetching posts from r/AskReddit
     headers = { 'user-agent':'py-reddit-scraping:0:1.0 (by u/ur_name)' }
-    posts = requests.get('https://www.reddit.com/r/AskReddit/top.json?t=day&limit=30', headers=headers).json()['data']['children']
-    
+    posts = requests.get('https://www.reddit.com/r/AskReddit/hot.json?t=day&limit=30', headers=headers).json()['data']['children']
     for post in posts:
         try:
+            list1 = []
+            list = []
+            a = False
+            num = 0
+
             # Avoid getting banned, no NSFW posts
             if 'nsfw' in post['data']['whitelist_status']:
                 continue
-
             url = post['data']['url']
             name = url.split('/')[-2]
             print(f"⏱ Processing post: {name}")
+            with open (r"C:/Users/Erin Tomorri/Desktop/tiktok-askreddit-main123/videos.txt", "r") as f: #opens file
+                contents = f.read()
 
-            # Make sure we have not already rendered/uploaded post
-            if name in [entry.split('.')[0] for entry in os.listdir('render')]:
-                print("❌ Post already processed!")
+                while num !=(len(contents)):
+                    if contents[num] == ";": #fix this
+                        list.append(num)# append all the spaces
+                    num+=1
+        
+                try:
+                    for y in range(len(list)):
+                        x = y+1
+                        list1.append(contents[list[y]+1:list[x]]) 
+                except IndexError:#upon a index error it will pass 
+                    pass
+                f.close()
+
+            if name in list1:
+                print("❌ Video already on your tiktok or made already")
+                a = True
+
+            if a == True:
                 continue
 
             # Clean 'temporary' files from last video
@@ -43,10 +65,17 @@ async def main():
                 await tts.generate(data[key], key, voice)
 
             # Render & Upload
-            print("\n🎥 Rendering video...")
             if video.render(name):
                 # Upload video if rendered
-                print("🌟 Next video")
+                print("\n🎥 Rendering video...")
+
+            list1.append(name)
+            with open("C:/Users/Erin Tomorri/Desktop/tiktok-askreddit-main123/videos.txt", "w") as w:
+                for num in range(len(list1)):
+                    if num == 0:
+                        w.write(";")
+                    w.write(list1[num]+";")
+
         except Exception as e:
             if config['debug']:
                 raise e
