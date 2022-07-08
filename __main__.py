@@ -3,7 +3,6 @@ from distutils.log import error
 from tkinter.tix import Tree
 import imp
 from scraper import scrape
-from upload import upload_to_tiktok
 from utils import config
 
 async def main():
@@ -22,15 +21,16 @@ async def main():
                 continue
             url = post['data']['url']
             name = url.split('/')[-2]
+            name = name.replace("_", " ")
             print(f"⏱ Processing post: {name}")
-            with open (r"C:/Users/Erin Tomorri/Desktop/tiktok-askreddit-main123/videos.txt", "r") as f: #opens file
+            with open (r"C:/Users/Erin Tomorri/Desktop/Youtube/Upload/videos.txt", "r") as f: #opens file
                 contents = f.read()
 
                 while num !=(len(contents)):
                     if contents[num] == ";": #fix this
                         list.append(num)# append all the spaces
                     num+=1
-        
+
                 try:
                     for y in range(len(list)):
                         x = y+1
@@ -68,19 +68,26 @@ async def main():
             if video.render(name):
                 # Upload video if rendered
                 print("\n🎥 Rendering video...")
-
             list1.append(name)
-            with open("C:/Users/Erin Tomorri/Desktop/tiktok-askreddit-main123/videos.txt", "w") as w:
+            with open("C:/Users/Erin Tomorri/Desktop/Youtube/Upload/videos.txt", "w") as w:
                 for num in range(len(list1)):
                     if num == 0:
                         w.write(";")
                     w.write(list1[num]+";")
 
         except Exception as e:
-            if config['debug']:
-                raise e
-            pass
-
+            try:
+                print ("error")
+                list1.append(name)
+                with open("C:/Users/Erin Tomorri/Desktop/Youtube/Upload/videos.txt", "w") as w:
+                    for num in range(len(list1)):
+                        if num == 0:
+                            w.write(";")
+                        w.write(list1[num]+";")
+            except Exception as e:
+                continue
+            
 if __name__ == '__main__':
-    [os.mkdir(dir) for dir in ['output','render','backgrounds'] if not os.path.exists(dir)]
-    asyncio.run(main())
+    while True:
+        [os.mkdir(dir) for dir in ['output','render','backgrounds'] if not os.path.exists(dir)]
+        asyncio.run(main())
