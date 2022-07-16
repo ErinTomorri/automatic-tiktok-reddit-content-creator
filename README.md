@@ -8,6 +8,5 @@ currently working on it (March 24, 2022), planning on updating later tonight. Th
 2. goto main and run
 3. the video will be downloaded into the rendered folder
 4. upload the tiktok manually
-5. https://www.tiktok.com/@reddits_tales attached is an example of the result
 
  
