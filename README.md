@@ -10,3 +10,4 @@ currently working on it (March 24, 2022), planning on updating later tonight. Th
 4. upload the tiktok manually
 
  
+![image](https://github.com/ErinTomorri/automatic-tiktok-reddit-content-creator/assets/97967950/5bf065ee-d1d4-4986-a750-6fc787fda537)
